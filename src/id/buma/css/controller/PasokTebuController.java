@@ -14,22 +14,42 @@ import id.buma.css.view.PasokTebuTableModel;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import javax.swing.JLabel;
-import javax.swing.RowFilter;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author Bayu Anandavi Muhardika
  * 
+ * Version history
+ * 
+ * v.0.20112017.0005
+ * + first production build
+ * + basic info display
+ * 
  */
+
 public class PasokTebuController {
+    private final String appVersion = "v.0.20112017.0005";
     
     private final MainWindow mw;
+    
     private final PasokTebuDAO pasokTebuDao = new PasokTebuDAOSQL();
+    
     private final PasokTebuHeaderRenderer pthr = new PasokTebuHeaderRenderer();
+    
     private final PasokTebuRowRenderer ptrr = new PasokTebuRowRenderer();
+    
     private int counter = 1;
+    
+    private int pageIndex = 1;
+    
+    private final int rowPerPage = 13;
+    
+    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebu(pasokTebuDao.getNewestDate())).getRowCount();
+    
+    private final int maxPage = (maxRow / rowPerPage) + 1;
+    
+    
     
     public PasokTebuController (MainWindow mw){
         this.mw = mw;
@@ -42,35 +62,34 @@ public class PasokTebuController {
         mw.getTblPasok().setDefaultRenderer(Object.class, ptrr);
     }
     
-    public void setTableModel(){
-        PasokTebuTableModel pttm = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebu(pasokTebuDao.getNewestDate()));
+    public void setTableModel(int pageIndex){
+        PasokTebuTableModel pttm = new PasokTebuTableModel(pasokTebuDao.getPagedPasokTebu(pageIndex, rowPerPage));
         mw.getTblPasok().setModel(pttm);
     }
     
     public void timerStarting(){
         counter++;
-        if (counter == 30){
-            setTableModel();
+        if (counter == 20){
+            pageIndex++;
+            if (pageIndex <= maxPage){
+                setTableModel(pageIndex);
+            } else {
+                pageIndex = 1;
+                setTableModel(pageIndex);
+            }
             counter = 0;
         }
         JLabel lblTanggal = mw.getLblTanggal();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
+        
+        /** UNTUK KEPERLUAN DEBUGGING
+        lblTanggal.setText(df.format(now) + " " + counter + "; Page Counter = " + 
+                pageIndex + "; Max Page = " + maxPage);
+        **/
+        
+        lblTanggal.setVisible(true);
         lblTanggal.setText(df.format(now));
     }
     
-    public void tablePage(){
-        TableRowSorter tblSorter = new TableRowSorter(mw.getTblPasok().getModel());
-        
-    }
-    
-    private RowFilter<PasokTebuTableModel,Integer> showFilter(final int itemsPerPage, final int target){
-        return new RowFilter<PasokTebuTableModel, Integer>() {
-            @Override
-            public boolean include(RowFilter.Entry<? extends PasokTebuTableModel, ? extends Integer> entry) {
-                int ei = entry.getIdentifier();
-                return (target*itemsPerPage <= ei && ei < target*itemsPerPage+itemsPerPage);
-            }
-        };
-    }
 }

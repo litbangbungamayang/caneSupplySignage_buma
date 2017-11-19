@@ -46,7 +46,6 @@ public class PasokTebuTableModel extends AbstractTableModel{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        int rowLimit = 10;
         PasokTebu pt = pasokTebu.get(rowIndex);
         switch (columnIndex){
             case 0 :

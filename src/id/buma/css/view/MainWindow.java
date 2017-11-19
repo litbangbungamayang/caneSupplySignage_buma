@@ -32,8 +32,10 @@ public class MainWindow extends javax.swing.JFrame {
         ptc.setTableHeader();
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
-        ptc.setTableModel();
-        //timer jam
+        lblTanggal.setVisible(false);
+        ptc.setTableModel(1);
+        
+        /** TIMER untuk jam dan trigger update tabel **/
         Timer tim = new Timer(1000,new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -55,6 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
         pnlMainWindowAtas = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblTanggal = new javax.swing.JLabel();
+        lblVersi = new javax.swing.JLabel();
         pnlMainWindowTengah = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPasok = new javax.swing.JTable();
@@ -81,6 +84,10 @@ public class MainWindow extends javax.swing.JFrame {
         lblTanggal.setForeground(new java.awt.Color(255, 255, 255));
         lblTanggal.setText("20 / 06 /2017  20:00");
 
+        lblVersi.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblVersi.setForeground(new java.awt.Color(255, 255, 255));
+        lblVersi.setText("[version]");
+
         javax.swing.GroupLayout pnlMainWindowAtasLayout = new javax.swing.GroupLayout(pnlMainWindowAtas);
         pnlMainWindowAtas.setLayout(pnlMainWindowAtasLayout);
         pnlMainWindowAtasLayout.setHorizontalGroup(
@@ -88,9 +95,14 @@ public class MainWindow extends javax.swing.JFrame {
             .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(lblTanggal))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 27, Short.MAX_VALUE))
+                    .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
+                        .addComponent(lblTanggal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblVersi)))
+                .addContainerGap())
         );
         pnlMainWindowAtasLayout.setVerticalGroup(
             pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,7 +110,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTanggal)
+                .addGroup(pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTanggal)
+                    .addComponent(lblVersi))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -216,6 +230,7 @@ public class MainWindow extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTanggal;
+    private javax.swing.JLabel lblVersi;
     private javax.swing.JPanel pnlMainWindowAtas;
     private javax.swing.JPanel pnlMainWindowBawah;
     private javax.swing.JPanel pnlMainWindowTengah;
@@ -228,6 +243,10 @@ public class MainWindow extends javax.swing.JFrame {
     
     public JLabel getLblTanggal(){
         return lblTanggal;
+    }
+    
+    public JLabel getLblVersi(){
+        return lblVersi;
     }
 
     

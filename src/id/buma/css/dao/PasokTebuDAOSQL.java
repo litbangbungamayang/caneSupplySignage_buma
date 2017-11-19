@@ -170,5 +170,18 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
         } else JOptionPane.showMessageDialog(mw, "Database Tidak Terkoneksi");
         return tglBaru;
     }
+
+    @Override
+    public List<PasokTebu> getPagedPasokTebu(int pageIndex, int maxRow) {
+        List<PasokTebu> plpt = new ArrayList<>();
+        List<PasokTebu> lpt = getAllPasokTebu(getNewestDate());
+        for(int i = 0; i <= maxRow - 1; i++){
+            int actualIndex = ((pageIndex - 1) * (maxRow - 1)) + i;
+            if (actualIndex < lpt.size()){
+                plpt.add(lpt.get(actualIndex));
+            }
+        }
+        return plpt;
+    }
     
 }
