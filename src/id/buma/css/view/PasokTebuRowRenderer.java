@@ -49,11 +49,12 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
                 break;
         }
         if (row % 2 == 0){
-            c.setBackground(new Color(204, 204, 204));
-            c.setForeground(Color.darkGray);
+            //c.setBackground(new Color(204, 204, 204));
+            c.setBackground(new Color(51,51,51));
+            c.setForeground(Color.yellow);
         } else {
-            c.setBackground(Color.white);
-            c.setForeground(Color.darkGray);
+            c.setBackground(Color.black);
+            c.setForeground(Color.yellow);
         }
         return c;
     }

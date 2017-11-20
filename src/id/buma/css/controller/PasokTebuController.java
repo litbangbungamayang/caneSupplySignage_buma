@@ -26,10 +26,13 @@ import javax.swing.table.JTableHeader;
  * + first production build
  * + basic info display
  * 
+ * v.0.20112017.1654
+ * + modifikasi tampilan tabel
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.0.20112017.0005";
+    private final String appVersion = "v.0.20112017.1654";
     
     private final MainWindow mw;
     
@@ -49,12 +52,17 @@ public class PasokTebuController {
     
     private final int maxPage = (maxRow / rowPerPage) + 1;
     
-    
+    public void setPengumuman(String isi){
+        mw.getLblPengumuman().setText(isi);
+    }
     
     public PasokTebuController (MainWindow mw){
         this.mw = mw;
     }
     
+    public void setVersionStatus(){
+        mw.getLblVersi().setText(appVersion);
+    }
     
     public void setTableHeader(){
         JTableHeader th = mw.getTblPasok().getTableHeader();
@@ -80,7 +88,7 @@ public class PasokTebuController {
             counter = 0;
         }
         JLabel lblTanggal = mw.getLblTanggal();
-        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime now = LocalDateTime.now();
         
         /** UNTUK KEPERLUAN DEBUGGING

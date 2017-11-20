@@ -5,6 +5,7 @@
  */
 package id.buma.css.dao;
 
+import id.buma.css.controller.PasokTebuController;
 import id.buma.css.database.DbTimbanganConnectionManager;
 import id.buma.css.model.PasokTebu;
 import id.buma.css.view.MainWindow;
@@ -23,7 +24,9 @@ import javax.swing.JOptionPane;
  * 
  */
 public class PasokTebuDAOSQL implements PasokTebuDAO{
+    
     private MainWindow mw;
+    
 
     @Override
     public List<PasokTebu> getAllPasokTebu(Date periode) {
@@ -142,7 +145,7 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
                 lpt.add(new PasokTebu("","TSI","",tonTsi,ritMasukTsi,ritBrutoTsi,ritNettoTsi));
                 lpt.add(new PasokTebu("","TOTAL","",tonTotal,ritMasukTotal,ritBrutoTotal,ritNettoTotal));
             } else {
-                
+                mw.getLblPengumuman().setText("Database tidak terhubung!");
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(mw, "Error getAllPasokTebu!\nError code : " +
@@ -167,14 +170,18 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
             } catch (Exception e){  
                 JOptionPane.showMessageDialog(mw, e.toString());
             }
-        } else JOptionPane.showMessageDialog(mw, "Database Tidak Terkoneksi");
+        } else {
+            // JOptionPane.showMessageDialog(mw, "Database tidak  terhubung");
+            // mw.getLblPengumuman().setText("Database tidak terhubung!");
+        }
         return tglBaru;
     }
 
     @Override
     public List<PasokTebu> getPagedPasokTebu(int pageIndex, int maxRow) {
         List<PasokTebu> plpt = new ArrayList<>();
-        List<PasokTebu> lpt = getAllPasokTebu(getNewestDate());
+        java.sql.Date tglBaru = getNewestDate();
+        List<PasokTebu> lpt = getAllPasokTebu(tglBaru);
         for(int i = 0; i <= maxRow - 1; i++){
             int actualIndex = ((pageIndex - 1) * (maxRow - 1)) + i;
             if (actualIndex < lpt.size()){
