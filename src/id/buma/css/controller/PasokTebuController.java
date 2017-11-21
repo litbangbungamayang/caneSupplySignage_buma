@@ -29,10 +29,13 @@ import javax.swing.table.JTableHeader;
  * v.0.20112017.1654
  * + modifikasi tampilan tabel
  * 
+ * v.0A.21112017.1441
+ * + branch baru, khusus monitoring tebu TR
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.0.20112017.1654";
+    private final String appVersion = "v.0A.21112017.1441";
     
     private final MainWindow mw;
     
@@ -46,9 +49,9 @@ public class PasokTebuController {
     
     private int pageIndex = 1;
     
-    private final int rowPerPage = 13;
+    private final int rowPerPage = 14;
     
-    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebu(pasokTebuDao.getNewestDate())).getRowCount();
+    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebuTR(pasokTebuDao.getNewestDate())).getRowCount();
     
     private final int maxPage = (maxRow / rowPerPage) + 1;
     
@@ -90,14 +93,13 @@ public class PasokTebuController {
         JLabel lblTanggal = mw.getLblTanggal();
         DateTimeFormatter df = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime now = LocalDateTime.now();
-        
+        lblTanggal.setVisible(true);
+        lblTanggal.setText(df.format(now));
         /** UNTUK KEPERLUAN DEBUGGING
         lblTanggal.setText(df.format(now) + " " + counter + "; Page Counter = " + 
                 pageIndex + "; Max Page = " + maxPage);
         **/
         
-        lblTanggal.setVisible(true);
-        lblTanggal.setText(df.format(now));
     }
     
 }

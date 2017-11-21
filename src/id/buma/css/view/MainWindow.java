@@ -86,7 +86,7 @@ public class MainWindow extends javax.swing.JFrame {
         lblTanggal.setForeground(new java.awt.Color(255, 255, 255));
         lblTanggal.setText("20 / 06 /2017  20:00");
 
-        lblVersi.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
+        lblVersi.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         lblVersi.setForeground(new java.awt.Color(255, 255, 255));
         lblVersi.setText("[version]");
 
@@ -123,6 +123,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
         jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
+        tblPasok.setBackground(new java.awt.Color(51, 51, 51));
         tblPasok.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
         tblPasok.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -135,7 +136,6 @@ public class MainWindow extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblPasok.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         tblPasok.setEnabled(false);
         tblPasok.setGridColor(new java.awt.Color(255, 255, 255));
         tblPasok.setIntercellSpacing(new java.awt.Dimension(0, 0));

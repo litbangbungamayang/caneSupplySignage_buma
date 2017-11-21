@@ -26,8 +26,8 @@ public class PasokTebuTableModel extends AbstractTableModel{
     }
     
     private final String[] columnNames = new String[]{
-        "RAYON",
         "AFD",
+        "DESA/WILAYAH",
         "ANTRIAN",
         "CANEYARD",
         "TOTAL RIT",
@@ -49,9 +49,9 @@ public class PasokTebuTableModel extends AbstractTableModel{
         PasokTebu pt = pasokTebu.get(rowIndex);
         switch (columnIndex){
             case 0 :
-                return pt.getRayon();
-            case 1 :
                 return pt.getAfdeling();
+            case 1 :
+                return pt.getWilayah();
             case 2 :
                 return pt.getRitJalur();
             case 3 :

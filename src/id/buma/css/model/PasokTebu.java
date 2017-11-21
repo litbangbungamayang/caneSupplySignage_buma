@@ -12,19 +12,17 @@ package id.buma.css.model;
  */
 public class PasokTebu {
     private String afdeling;
-    private String rayon;
-    private String tstr;
+    private String wilayah;
     private Double tonase;
     private int ritMasuk;
     private int ritBruto;
     private int ritNetto;
     private int ritJalur;
     
-    public PasokTebu(String afdeling,String rayon, String tstr, Double tonase,
+    public PasokTebu(String afdeling,String wilayah, Double tonase,
             int ritMasuk,int ritBruto, int ritNetto){
         this.afdeling = afdeling;
-        this.rayon = rayon;
-        this.tstr = tstr;
+        this.wilayah = wilayah;
         this.tonase = tonase;
         this.ritMasuk = ritMasuk;
         this.ritBruto = ritBruto;
@@ -39,21 +37,13 @@ public class PasokTebu {
     public void setAfdeling(String afdeling) {
         this.afdeling = afdeling;
     }
-
-    public String getRayon() {
-        return rayon;
+    
+    public String getWilayah(){
+        return wilayah;
     }
-
-    public void setRayon(String rayon) {
-        this.rayon = rayon;
-    }
-
-    public String getTstr() {
-        return tstr;
-    }
-
-    public void setTstr(String tstr) {
-        this.tstr = tstr;
+    
+    public void setWilayah(String wilayah){
+        this.wilayah = wilayah;
     }
 
     public Double getTonase() {

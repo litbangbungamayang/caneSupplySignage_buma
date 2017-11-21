@@ -14,6 +14,7 @@ import javax.swing.table.TableCellRenderer;
 /**
  *
  * @author Bayu Anandavi Muhardika
+ * 
  */
 public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements TableCellRenderer{
     
@@ -22,13 +23,22 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
             boolean isSelected, boolean hasFocus, int row, int column){
         Component c = super.getTableCellRendererComponent(table, value, isSelected,
                 hasFocus, row, column);
+        if (row % 2 == 0){
+            c.setBackground(new Color(51,51,51));
+            c.setForeground(Color.yellow);
+        } else {
+            c.setBackground(Color.black);
+            c.setForeground(Color.yellow);
+        }
         switch (column){
             case 0 :
                 this.setHorizontalAlignment(CENTER);
+                table.getColumnModel().getColumn(column).setPreferredWidth(100);
                 table.getColumnModel().getColumn(column).setCellRenderer(this);
                 break;
             case 1 :
-                this.setHorizontalAlignment(CENTER);
+                this.setHorizontalAlignment(LEFT);
+                table.getColumnModel().getColumn(column).setPreferredWidth(400);
                 table.getColumnModel().getColumn(column).setCellRenderer(this);
                 break;
             case 2 :
@@ -47,14 +57,6 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
                 this.setHorizontalAlignment(RIGHT);
                 table.getColumnModel().getColumn(column).setCellRenderer(this);
                 break;
-        }
-        if (row % 2 == 0){
-            //c.setBackground(new Color(204, 204, 204));
-            c.setBackground(new Color(51,51,51));
-            c.setForeground(Color.yellow);
-        } else {
-            c.setBackground(Color.black);
-            c.setForeground(Color.yellow);
         }
         return c;
     }
