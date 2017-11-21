@@ -124,7 +124,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
         tblPasok.setBackground(new java.awt.Color(51, 51, 51));
-        tblPasok.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        tblPasok.setFont(new java.awt.Font("Trebuchet MS", 0, 30)); // NOI18N
         tblPasok.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},

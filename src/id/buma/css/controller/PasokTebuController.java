@@ -32,10 +32,13 @@ import javax.swing.table.JTableHeader;
  * v.0A.21112017.1441
  * + branch baru, khusus monitoring tebu TR
  * 
+ * v.0A.21112017.1449
+ * + [UPDATE] tampilan lebar kolom dan ukuran huruf
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.0A.21112017.1441";
+    private final String appVersion = "v.0A.21112017.1449";
     
     private final MainWindow mw;
     

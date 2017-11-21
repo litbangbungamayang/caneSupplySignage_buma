@@ -23,7 +23,7 @@ public class PasokTebuHeaderRenderer extends DefaultTableCellRenderer{
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         JLabel lbl;
         lbl = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        lbl.setFont(new Font("Segoe UI", Font.PLAIN,26));
+        lbl.setFont(new Font("Segoe UI", Font.PLAIN,20));
         lbl.setForeground(Color.WHITE);
         lbl.setBackground(new Color(0,51,250));
         lbl.setHorizontalAlignment(JLabel.CENTER);

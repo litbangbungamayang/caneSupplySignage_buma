@@ -33,7 +33,7 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
         switch (column){
             case 0 :
                 this.setHorizontalAlignment(CENTER);
-                table.getColumnModel().getColumn(column).setPreferredWidth(100);
+                table.getColumnModel().getColumn(column).setPreferredWidth(40);
                 table.getColumnModel().getColumn(column).setCellRenderer(this);
                 break;
             case 1 :

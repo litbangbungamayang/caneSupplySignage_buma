@@ -28,9 +28,9 @@ public class PasokTebuTableModel extends AbstractTableModel{
     private final String[] columnNames = new String[]{
         "AFD",
         "DESA/WILAYAH",
-        "ANTRIAN",
-        "CANEYARD",
-        "TOTAL RIT",
+        "JALUR",
+        "DLM CY",
+        "JML RIT",
         "TON TEBU"
     };
     
