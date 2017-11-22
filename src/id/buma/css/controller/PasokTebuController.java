@@ -35,10 +35,13 @@ import javax.swing.table.JTableHeader;
  * v.0A.21112017.1449
  * + [UPDATE] tampilan lebar kolom dan ukuran huruf
  * 
+ * v.0A.22112017.1509
+ * + [UPDATE] perbaikan maxPage yang tidak sesuai dengan jumlah baris
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.0A.21112017.1449";
+    private final String appVersion = "v.0A.22112017.1509";
     
     private final MainWindow mw;
     
@@ -54,7 +57,9 @@ public class PasokTebuController {
     
     private final int rowPerPage = 14;
     
-    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebuTR(pasokTebuDao.getNewestDate())).getRowCount();
+    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebuTR
+        (pasokTebuDao.getNewestDate())).getRowCount() + new PasokTebuTableModel
+        (pasokTebuDao.getSummaryPasokTR(pasokTebuDao.getNewestDate())).getRowCount();
     
     private final int maxPage = (maxRow / rowPerPage) + 1;
     
@@ -98,10 +103,9 @@ public class PasokTebuController {
         LocalDateTime now = LocalDateTime.now();
         lblTanggal.setVisible(true);
         lblTanggal.setText(df.format(now));
-        /** UNTUK KEPERLUAN DEBUGGING
+        /** UNTUK KEPERLUAN DEBUGGING **/
         lblTanggal.setText(df.format(now) + " " + counter + "; Page Counter = " + 
                 pageIndex + "; Max Page = " + maxPage);
-        **/
         
     }
     
