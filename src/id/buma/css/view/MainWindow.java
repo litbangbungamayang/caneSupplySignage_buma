@@ -161,7 +161,7 @@ public class MainWindow extends javax.swing.JFrame {
         pnlMainWindowBawah.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pnlMainWindowBawah.setPreferredSize(new java.awt.Dimension(100, 50));
 
-        lblPengumuman.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        lblPengumuman.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblPengumuman.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout pnlMainWindowBawahLayout = new javax.swing.GroupLayout(pnlMainWindowBawah);
