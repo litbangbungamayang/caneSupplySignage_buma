@@ -29,10 +29,13 @@ import javax.swing.table.JTableHeader;
  * v.0.20112017.1654
  * + modifikasi tampilan tabel
  * 
+ * v.1.23052018.1736
+ * + Perubahan database menyesuaikan SIMPG
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.0.20112017.1654";
+    private final String appVersion = "v.1.23052018.1736";
     
     private final MainWindow mw;
     
@@ -48,7 +51,7 @@ public class PasokTebuController {
     
     private final int rowPerPage = 13;
     
-    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebu(pasokTebuDao.getNewestDate())).getRowCount();
+    private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebu()).getRowCount();
     
     private final int maxPage = (maxRow / rowPerPage) + 1;
     

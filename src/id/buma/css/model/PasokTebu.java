@@ -16,20 +16,18 @@ public class PasokTebu {
     private String tstr;
     private Double tonase;
     private int ritMasuk;
-    private int ritBruto;
-    private int ritNetto;
-    private int ritJalur;
+    private int ritCaneyard;
+    private int ritAntrian;
     
     public PasokTebu(String afdeling,String rayon, String tstr, Double tonase,
-            int ritMasuk,int ritBruto, int ritNetto){
+            int ritMasuk,int ritCaneyard, int ritAntrian){
         this.afdeling = afdeling;
         this.rayon = rayon;
         this.tstr = tstr;
         this.tonase = tonase;
         this.ritMasuk = ritMasuk;
-        this.ritBruto = ritBruto;
-        this.ritNetto = ritNetto;
-        this.ritJalur = ritMasuk - (ritNetto + ritBruto); 
+        this.ritCaneyard = ritCaneyard;
+        this.ritAntrian = ritAntrian;
     }
 
     public String getAfdeling() {
@@ -72,28 +70,20 @@ public class PasokTebu {
         this.ritMasuk = ritMasuk;
     }
 
-    public int getRitBruto() {
-        return ritBruto;
+    public int getRitAntrian() {
+        return ritAntrian;
     }
 
-    public void setRitBruto(int ritBruto) {
-        this.ritBruto = ritBruto;
+    public void setRitAntrian(int ritAntrian) {
+        this.ritAntrian = ritAntrian;
     }
 
-    public int getRitNetto() {
-        return ritNetto;
+    public int getRitCaneyard() {
+        return ritCaneyard;
     }
 
-    public void setRitNetto(int ritNetto) {
-        this.ritNetto = ritNetto;
-    }
-
-    public int getRitJalur() {
-        return ritJalur;
-    }
-
-    public void setRitJalur(int ritJalur) {
-        this.ritJalur = ritJalur;
+    public void setRitCaneyard(int ritCaneyard) {
+        this.ritCaneyard = ritCaneyard;
     }
             
 }

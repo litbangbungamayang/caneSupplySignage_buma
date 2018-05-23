@@ -29,8 +29,10 @@ public class DbTimbanganConnectionManager {
                 
                 String slokal = "jdbc:sqlserver://LOCALHOST\\X230_SRV:1433;"+
                                    "databaseName=SugarCaneDb;user=prod;password=prod;";
+                
+                String s3 = "jdbc:mysql://192.168.39.150:3306/sim_tr?user=root&password=tiptpn7&useSSL=false";
 
-                connection = DriverManager.getConnection(slive);
+                connection = DriverManager.getConnection(s3);
                 
             } catch (ClassNotFoundException | SQLException e) {
                 return null;

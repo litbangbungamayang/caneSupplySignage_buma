@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface PasokTebuDAO {
     
-    public List<PasokTebu> getAllPasokTebu(java.sql.Date periode);
+    public List<PasokTebu> getAllPasokTebu();
     
     public List<PasokTebu> getPagedPasokTebu(int pageIndex, int maxRow);
     

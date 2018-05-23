@@ -80,7 +80,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Informasi Pasok Tebu Pabrik Gula Bungamayang");
+        jLabel1.setText("Pasok Tebu Pabrik Gula Bungamayang");
 
         lblTanggal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTanggal.setForeground(new java.awt.Color(255, 255, 255));
@@ -99,7 +99,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addGroup(pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(0, 27, Short.MAX_VALUE))
+                        .addGap(0, 185, Short.MAX_VALUE))
                     .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
                         .addComponent(lblTanggal)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

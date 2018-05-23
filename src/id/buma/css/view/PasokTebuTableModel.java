@@ -27,7 +27,7 @@ public class PasokTebuTableModel extends AbstractTableModel{
     
     private final String[] columnNames = new String[]{
         "RAYON",
-        "AFD",
+        "AFDELING",
         "ANTRIAN",
         "CANEYARD",
         "TOTAL RIT",
@@ -53,9 +53,9 @@ public class PasokTebuTableModel extends AbstractTableModel{
             case 1 :
                 return pt.getAfdeling();
             case 2 :
-                return pt.getRitJalur();
+                return pt.getRitAntrian();
             case 3 :
-                return pt.getRitBruto();
+                return pt.getRitCaneyard();
             case 4 :
                 return pt.getRitMasuk();
             case 5 :

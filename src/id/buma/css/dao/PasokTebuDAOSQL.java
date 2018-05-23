@@ -5,16 +5,19 @@
  */
 package id.buma.css.dao;
 
-import id.buma.css.controller.PasokTebuController;
 import id.buma.css.database.DbTimbanganConnectionManager;
 import id.buma.css.model.PasokTebu;
 import id.buma.css.view.MainWindow;
+import id.buma.spt.database.DBConnection;
 import java.sql.CallableStatement;
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -29,45 +32,32 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
     
 
     @Override
-    public List<PasokTebu> getAllPasokTebu(Date periode) {
+    public List<PasokTebu> getAllPasokTebu() {
         List<PasokTebu> lpt = new ArrayList<>();
-        try {
-            if (DbTimbanganConnectionManager.isConnect()){
+        Connection conn = new DBConnection().getConn();
+        String callSql = "call monitoring_pasok(?,?)";
+        try (CallableStatement cst = conn.prepareCall(callSql)){
+            if (DbTimbanganConnectionManager.isConnect()){              
+                SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd");
+                java.util.Date periodeAwal = new java.util.Date();
+                java.util.Date periodeAkhir;
+                Calendar c  = Calendar.getInstance();
+                c.setTime(periodeAwal);
+                c.add(Calendar.DATE, 1);
+                periodeAkhir = c.getTime();
+                String strPeriodeAwal = sdfNow.format(periodeAwal);
+                String strPeriodeAkhir = sdfNow.format(periodeAkhir);
+                String strJamAwal = "06:00:00";
+                String strJamAkhir = "05:59:59";
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                java.sql.Timestamp tsAwal = new Timestamp(sdf.parse(strPeriodeAwal + " " + strJamAwal).getTime());
+                java.sql.Timestamp tsAkhir = new Timestamp(sdf.parse(strPeriodeAkhir + " " + strJamAkhir).getTime());
                 /*
-                String sql = "SELECT T.TSTR AS TSTR, A.IDAFD AS AFDELING, R.RAYON AS RAYON,"
-                        + "(SELECT COUNT(NUMERATOR) FROM TIMBANG TSUB WHERE "
-                        + "A.IDAFD=TSUB.IDAFD "
-                        + "AND TSUB.PERIODE=?) AS RIT_MASUK,"
-                        + "(SELECT COUNT(NUMERATOR) FROM TIMBANG TSUB WHERE "
-                        + "A.IDAFD=TSUB.IDAFD "
-                        + "AND TSUB.BERAT1>0 AND TSUB.BERAT2=0"
-                        + "AND TSUB.PERIODE=?) AS RIT_BRUTO,"
-                        + "(SELECT COUNT(NUMERATOR) FROM TIMBANG TSUB WHERE "
-                        + "A.IDAFD=TSUB.IDAFD "
-                        + "AND TSUB.NETTO>0"
-                        + "AND TSUB.PERIODE=?) AS RIT_NETTO,"
-                        + "(SELECT SUM(NETTO/10) FROM TIMBANG TSUB WHERE "
-                        + "A.IDAFD=TSUB.IDAFD "
-                        + "AND TSUB.NETTO>0 AND TSUB.PERIODE=?) AS TONASE "
-                        + "FROM TIMBANG T INNER JOIN AFDELING A ON T.IDAFD=A.IDAFD "
-                        + "INNER JOIN RAYON R ON A.IDRAYON=R.IDRAYON "
-                        + "WHERE T.PERIODE=? "
-                        + "GROUP BY T.TSTR,R.RAYON,A.IDAFD "
-                        + "ORDER BY T.TSTR,R.RAYON,A.IDAFD ";
-                PreparedStatement ps = DbTimbanganConnectionManager.getConnection().prepareStatement(sql);
-                java.sql.Date periodeSql = new java.sql.Date(periode.getTime());
-                ps.setDate(1, periodeSql);
-                ps.setDate(2, periodeSql);
-                ps.setDate(3, periodeSql);
-                ps.setDate(4, periodeSql);
-                ps.setDate(5, periodeSql);
-                ResultSet rs = ps.executeQuery();
-                */
-                String callSql = "exec MONITORING_PASOK ?";
-                java.sql.Date periodeSql = new java.sql.Date(periode.getTime());
                 CallableStatement cst = DbTimbanganConnectionManager.getConnection().prepareCall(callSql,
                         ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                cst.setDate(1, periodeSql);
+                */
+                cst.setTimestamp(1, tsAwal);
+                cst.setTimestamp(2, tsAkhir);
                 boolean results = cst.execute();
                 int rowsAffected = 0;
                 ResultSet rs = null;
@@ -85,65 +75,59 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
                 Double tonKut = 0.0;
                 Double tonTsi = 0.0;
                 Double tonTotal = 0.0;
-                int ritMasukTs = 0;
-                int ritMasukTr = 0;
-                int ritMasukKut = 0;
-                int ritMasukTsi = 0;
-                int ritMasukTotal = 0;
-                int ritBrutoTs = 0;
-                int ritBrutoTr = 0;
-                int ritBrutoKut = 0;
-                int ritBrutoTsi = 0;
-                int ritBrutoTotal = 0;
-                int ritNettoTs = 0;
-                int ritNettoTr = 0;
-                int ritNettoKut = 0;
-                int ritNettoTsi = 0;
-                int ritNettoTotal = 0;
+                int totalritTs = 0;
+                int totalritTr = 0;
+                int totalritKut = 0;
+                int totalritTsi = 0;
+                int totalritTotal = 0;
+                int antrianTs = 0;
+                int antrianTr = 0;
+                int antrianKut = 0;
+                int antrianTsi = 0;
+                int antrianTotal = 0;
+                int caneyardTs = 0;
+                int caneyardTr = 0;
+                int caneyardKut = 0;
+                int caneyardTsi = 0;
+                int caneyardTotal = 0;
                 while (rs.next()){
                     PasokTebu pt = new PasokTebu(
-                            rs.getString("AFDELING"), 
-                            rs.getString("RAYON"), 
-                            rs.getString("TSTR"), 
-                            rs.getDouble("TONASE"), 
-                            rs.getInt("RIT_MASUK"), 
-                            rs.getInt("RIT_BRUTO"), 
-                            rs.getInt("RIT_NETTO"));
+                            rs.getString("afdeling"), 
+                            rs.getString("rayon"), 
+                            rs.getString("tstr"), 
+                            rs.getDouble("netto"), 
+                            rs.getInt("totalrit"), 
+                            rs.getInt("caneyard"), 
+                            rs.getInt("antrian"));
                     lpt.add(pt);
-                    if (rs.getString("TSTR").equals("1")){
-                        tonTs += rs.getDouble("TONASE");
-                        ritMasukTs += rs.getInt("RIT_MASUK");
-                        ritBrutoTs += rs.getInt("RIT_BRUTO");
-                        ritNettoTs += rs.getInt("RIT_NETTO");
+                    if (rs.getString("tstr").equals("TS")){
+                        tonTs += rs.getDouble("netto");
+                        totalritTs += rs.getInt("totalrit");
+                        antrianTs += rs.getInt("antrian");
+                        caneyardTs += rs.getInt("caneyard");
                     }
-                    if (rs.getString("TSTR").equals("2")){
-                        tonTr += rs.getDouble("TONASE");
-                        ritMasukTr += rs.getInt("RIT_MASUK");
-                        ritBrutoTr += rs.getInt("RIT_BRUTO");
-                        ritNettoTr += rs.getInt("RIT_NETTO");
+                    if (rs.getString("tstr").equals("TR")){
+                        tonTr += rs.getDouble("netto");
+                        totalritTr += rs.getInt("totalrit");
+                        antrianTr += rs.getInt("antrian");
+                        caneyardTr += rs.getInt("caneyard");
                     }
-                    if (rs.getString("TSTR").equals("3")){
-                        tonKut += rs.getDouble("TONASE");
-                        ritMasukKut += rs.getInt("RIT_MASUK");
-                        ritBrutoKut += rs.getInt("RIT_BRUTO");
-                        ritNettoKut += rs.getInt("RIT_NETTO");
-                    }
-                    if (rs.getString("TSTR").equals("4")){
-                        tonTsi += rs.getDouble("TONASE");
-                        ritMasukTsi += rs.getInt("RIT_MASUK");
-                        ritBrutoTsi += rs.getInt("RIT_BRUTO");
-                        ritNettoTsi += rs.getInt("RIT_NETTO");
+                    if (rs.getString("tstr").equals("TSI")){
+                        tonTsi += rs.getDouble("netto");
+                        totalritTsi += rs.getInt("totalrit");
+                        antrianTsi += rs.getInt("antrian");
+                        caneyardTsi += rs.getInt("caneyard");
                     }
                     tonTotal = tonTs + tonTr + tonKut + tonTsi;
-                    ritMasukTotal = ritMasukTs + ritMasukTr + ritMasukKut + ritMasukTsi;
-                    ritBrutoTotal = ritBrutoTs + ritBrutoTr + ritBrutoKut + ritBrutoTsi;
-                    ritNettoTotal = ritNettoTs + ritNettoTr + ritNettoKut + ritNettoTsi;
+                    totalritTotal = totalritTs + totalritTr + totalritKut + totalritTsi;
+                    antrianTotal = antrianTs + antrianTr + antrianKut + antrianTsi;
+                    caneyardTotal = caneyardTs + caneyardTr + caneyardKut + caneyardTsi;
                 }
-                lpt.add(new PasokTebu("","TS","",tonTs,ritMasukTs,ritBrutoTs,ritNettoTs));
-                lpt.add(new PasokTebu("","TR","",tonTr,ritMasukTr,ritBrutoTr,ritNettoTr));
-                lpt.add(new PasokTebu("","KUT","",tonKut,ritMasukKut,ritBrutoKut,ritNettoKut));
-                lpt.add(new PasokTebu("","TSI","",tonTsi,ritMasukTsi,ritBrutoTsi,ritNettoTsi));
-                lpt.add(new PasokTebu("","TOTAL","",tonTotal,ritMasukTotal,ritBrutoTotal,ritNettoTotal));
+                lpt.add(new PasokTebu("","JML TS","",tonTs,totalritTs,caneyardTs,antrianTs));
+                lpt.add(new PasokTebu("","JML TR","",tonTr,totalritTr,caneyardTr,antrianTr));
+                lpt.add(new PasokTebu("","JML TSI","",tonTsi,totalritTsi,caneyardTsi,antrianTsi));
+                lpt.add(new PasokTebu("","TOTAL","",tonTotal,totalritTotal,caneyardTotal,antrianTotal));
+                //JOptionPane.showMessageDialog(null, lpt.size());
             } else {
                 mw.getLblPengumuman().setText("Database tidak terhubung!");
             }
@@ -180,8 +164,7 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
     @Override
     public List<PasokTebu> getPagedPasokTebu(int pageIndex, int maxRow) {
         List<PasokTebu> plpt = new ArrayList<>();
-        java.sql.Date tglBaru = getNewestDate();
-        List<PasokTebu> lpt = getAllPasokTebu(tglBaru);
+        List<PasokTebu> lpt = getAllPasokTebu();
         for(int i = 0; i <= maxRow - 1; i++){
             int actualIndex = ((pageIndex - 1) * (maxRow - 1)) + i;
             if (actualIndex < lpt.size()){
