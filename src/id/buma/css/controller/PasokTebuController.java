@@ -32,10 +32,12 @@ import javax.swing.table.JTableHeader;
  * v.1.23052018.1736
  * + Perubahan database menyesuaikan SIMPG
  * 
+ * v.1.24052018.0439
+ * + Perubahan setelan jam
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.1.23052018.1736";
+    private final String appVersion = "v.1.24052018.0439";
     
     private final MainWindow mw;
     

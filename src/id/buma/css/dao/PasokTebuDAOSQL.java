@@ -8,7 +8,7 @@ package id.buma.css.dao;
 import id.buma.css.database.DbTimbanganConnectionManager;
 import id.buma.css.model.PasokTebu;
 import id.buma.css.view.MainWindow;
-import id.buma.spt.database.DBConnection;
+import id.buma.css.database.DBConnection;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -37,19 +38,26 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
         Connection conn = new DBConnection().getConn();
         String callSql = "call monitoring_pasok(?,?)";
         try (CallableStatement cst = conn.prepareCall(callSql)){
-            if (DbTimbanganConnectionManager.isConnect()){              
+            if (DbTimbanganConnectionManager.isConnect()){
+                String strJamAwal = "06:00:00";
+                String strJamAkhir = "05:59:59";
                 SimpleDateFormat sdfNow = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
                 java.util.Date periodeAwal = new java.util.Date();
                 java.util.Date periodeAkhir;
                 Calendar c  = Calendar.getInstance();
-                c.setTime(periodeAwal);
-                c.add(Calendar.DATE, 1);
-                periodeAkhir = c.getTime();
+                if (LocalDateTime.now().getHour() < 6){
+                    c.setTime(periodeAwal);
+                    c.add(Calendar.DATE, -1);
+                    periodeAkhir = periodeAwal;
+                    periodeAwal = c.getTime();
+                } else {
+                    c.setTime(periodeAwal);
+                    c.add(Calendar.DATE, 1);
+                    periodeAkhir = c.getTime();
+                }   
                 String strPeriodeAwal = sdfNow.format(periodeAwal);
-                String strPeriodeAkhir = sdfNow.format(periodeAkhir);
-                String strJamAwal = "06:00:00";
-                String strJamAkhir = "05:59:59";
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String strPeriodeAkhir = sdfNow.format(periodeAkhir);                              
                 java.sql.Timestamp tsAwal = new Timestamp(sdf.parse(strPeriodeAwal + " " + strJamAwal).getTime());
                 java.sql.Timestamp tsAkhir = new Timestamp(sdf.parse(strPeriodeAkhir + " " + strJamAkhir).getTime());
                 /*
