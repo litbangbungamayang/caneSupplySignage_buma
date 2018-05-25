@@ -34,10 +34,14 @@ import javax.swing.table.JTableHeader;
  * 
  * v.1.24052018.0439
  * + Perubahan setelan jam
+ * 
+ * v.1.25052018.0900
+ * + Perubahan format tampilan, grouping per rayon
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.1.24052018.0439";
+    private final String appVersion = "v.1.25052018.0900";
     
     private final MainWindow mw;
     
@@ -51,7 +55,7 @@ public class PasokTebuController {
     
     private int pageIndex = 1;
     
-    private final int rowPerPage = 13;
+    private final int rowPerPage = 14;
     
     private final int maxRow = new PasokTebuTableModel(pasokTebuDao.getAllPasokTebu()).getRowCount();
     

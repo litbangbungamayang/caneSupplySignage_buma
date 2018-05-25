@@ -75,7 +75,7 @@ public class MainWindow extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        pnlMainWindowAtas.setBackground(new java.awt.Color(0, 51, 153));
+        pnlMainWindowAtas.setBackground(new java.awt.Color(60, 60, 60));
         pnlMainWindowAtas.setPreferredSize(new java.awt.Dimension(628, 100));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
@@ -120,10 +120,11 @@ public class MainWindow extends javax.swing.JFrame {
 
         pnlMainWindowTengah.setBackground(new java.awt.Color(255, 255, 255));
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setBackground(new java.awt.Color(153, 153, 153));
         jScrollPane1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
 
-        tblPasok.setFont(new java.awt.Font("Trebuchet MS", 0, 36)); // NOI18N
+        tblPasok.setBackground(new java.awt.Color(153, 153, 153));
+        tblPasok.setFont(new java.awt.Font("Consolas", 0, 36)); // NOI18N
         tblPasok.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -157,7 +158,7 @@ public class MainWindow extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
 
-        pnlMainWindowBawah.setBackground(new java.awt.Color(0, 51, 153));
+        pnlMainWindowBawah.setBackground(new java.awt.Color(51, 51, 51));
         pnlMainWindowBawah.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         pnlMainWindowBawah.setPreferredSize(new java.awt.Dimension(100, 50));
 

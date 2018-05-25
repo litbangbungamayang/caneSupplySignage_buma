@@ -22,6 +22,7 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
             boolean isSelected, boolean hasFocus, int row, int column){
         Component c = super.getTableCellRendererComponent(table, value, isSelected,
                 hasFocus, row, column);
+        table.getParent().setBackground(new Color(90,90,90));
         switch (column){
             case 0 :
                 this.setHorizontalAlignment(CENTER);
@@ -53,7 +54,7 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
             c.setBackground(new Color(51,51,51));
             c.setForeground(Color.yellow);
         } else {
-            c.setBackground(Color.black);
+            c.setBackground(new Color(30,30,30));
             c.setForeground(Color.yellow);
         }
         return c;

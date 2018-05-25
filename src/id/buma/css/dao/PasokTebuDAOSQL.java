@@ -36,7 +36,7 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
     public List<PasokTebu> getAllPasokTebu() {
         List<PasokTebu> lpt = new ArrayList<>();
         Connection conn = new DBConnection().getConn();
-        String callSql = "call monitoring_pasok(?,?)";
+        String callSql = "call monitoring_pasok_rayon(?,?)";
         try (CallableStatement cst = conn.prepareCall(callSql)){
             if (DbTimbanganConnectionManager.isConnect()){
                 String strJamAwal = "06:00:00";
@@ -100,7 +100,7 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
                 int caneyardTotal = 0;
                 while (rs.next()){
                     PasokTebu pt = new PasokTebu(
-                            rs.getString("afdeling"), 
+                            "-", 
                             rs.getString("rayon"), 
                             rs.getString("tstr"), 
                             rs.getDouble("netto"), 
