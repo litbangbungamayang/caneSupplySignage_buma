@@ -38,10 +38,13 @@ import javax.swing.table.JTableHeader;
  * v.1.25052018.0900
  * + Perubahan format tampilan, grouping per rayon
  * 
+ * v.1.08062018.0047
+ * + Perubahan format tampilan, grouping per afdeling
+ * 
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.1.25052018.0900";
+    private final String appVersion = "v.1.08062018.0047";
     
     private final MainWindow mw;
     
