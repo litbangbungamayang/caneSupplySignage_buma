@@ -140,8 +140,11 @@ public class PasokTebuDAOSQL implements PasokTebuDAO{
                 mw.getLblPengumuman().setText("Database tidak terhubung!");
             }
         } catch (Exception e){
+            /*
             JOptionPane.showMessageDialog(mw, "Error getAllPasokTebu!\nError code : " +
                     e.toString(), "", JOptionPane.ERROR_MESSAGE);
+           */
+            System.out.println(e.toString());
         }
         return lpt;
     }

@@ -35,6 +35,7 @@ public class MainWindow extends javax.swing.JFrame {
         jScrollPane1.setBorder(BorderFactory.createEmptyBorder());
         lblTanggal.setVisible(false);
         ptc.setTableModel(1);
+        ptc.setFont();
         
         /** TIMER untuk jam dan trigger update tabel **/
         Timer tim = new Timer(1000,new ActionListener(){
@@ -56,7 +57,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlMainWindowAtas = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblJudul = new javax.swing.JLabel();
         lblTanggal = new javax.swing.JLabel();
         lblVersi = new javax.swing.JLabel();
         pnlMainWindowTengah = new javax.swing.JPanel();
@@ -73,14 +74,13 @@ public class MainWindow extends javax.swing.JFrame {
         setLocationByPlatform(true);
         setName("frmUtama"); // NOI18N
         setUndecorated(true);
-        setResizable(false);
 
         pnlMainWindowAtas.setBackground(new java.awt.Color(60, 60, 60));
         pnlMainWindowAtas.setPreferredSize(new java.awt.Dimension(628, 100));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Pasok Tebu Pabrik Gula Bungamayang");
+        lblJudul.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        lblJudul.setForeground(new java.awt.Color(255, 255, 255));
+        lblJudul.setText("Pasok Tebu Pabrik Gula Bungamayang");
 
         lblTanggal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lblTanggal.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,7 +98,7 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblJudul)
                         .addGap(0, 185, Short.MAX_VALUE))
                     .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
                         .addComponent(lblTanggal)
@@ -110,7 +110,7 @@ public class MainWindow extends javax.swing.JFrame {
             pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlMainWindowAtasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblJudul)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlMainWindowAtasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTanggal)
@@ -239,8 +239,8 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblJudul;
     private javax.swing.JLabel lblPengumuman;
     private javax.swing.JLabel lblTanggal;
     private javax.swing.JLabel lblVersi;
@@ -264,6 +264,10 @@ public class MainWindow extends javax.swing.JFrame {
     
     public JLabel getLblPengumuman(){
         return lblPengumuman;
+    }
+    
+    public JLabel getLblJudul(){
+        return lblJudul;
     }
 
     

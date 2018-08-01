@@ -30,6 +30,7 @@ public class DBConnection {
             conn = DriverManager.getConnection(s3);
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.toString());
         }
         return conn;
     }

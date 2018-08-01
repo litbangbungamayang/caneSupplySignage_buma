@@ -7,6 +7,11 @@ package id.buma.css.view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
@@ -22,6 +27,12 @@ public class PasokTebuRowRenderer extends DefaultTableCellRenderer implements Ta
             boolean isSelected, boolean hasFocus, int row, int column){
         Component c = super.getTableCellRendererComponent(table, value, isSelected,
                 hasFocus, row, column);
+        try { 
+            c.setFont(Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getClassLoader().getResource("lib/consola.ttf").openStream()).deriveFont(Font.PLAIN,36));
+        } catch (IOException | FontFormatException ex) {
+            Logger.getLogger(PasokTebuRowRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        }
         table.getParent().setBackground(new Color(90,90,90));
         switch (column){
             case 0 :

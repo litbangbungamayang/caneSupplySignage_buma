@@ -11,9 +11,15 @@ import id.buma.css.view.MainWindow;
 import id.buma.css.view.PasokTebuHeaderRenderer;
 import id.buma.css.view.PasokTebuRowRenderer;
 import id.buma.css.view.PasokTebuTableModel;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.JTableHeader;
 
 /**
@@ -38,10 +44,12 @@ import javax.swing.table.JTableHeader;
  * v.1.25052018.0900
  * + Perubahan format tampilan, grouping per rayon
  * 
+ * v.1.02082018.0129
+ * + Perubahan format tampilan untuk Raspberry Pi
  */
 
 public class PasokTebuController {
-    private final String appVersion = "v.1.25052018.0900";
+    private final String appVersion = "v.1.02082018.0129";
     
     private final MainWindow mw;
     
@@ -67,6 +75,18 @@ public class PasokTebuController {
     
     public PasokTebuController (MainWindow mw){
         this.mw = mw;
+    }
+    
+    public void setFont(){
+        try { 
+            Font segoeUi = Font.createFont(Font.TRUETYPE_FONT,
+                    getClass().getClassLoader().getResource("lib/segoeui.ttf").openStream());
+            mw.getLblJudul().setFont(segoeUi.deriveFont(Font.PLAIN,36));
+            mw.getLblTanggal().setFont(segoeUi.deriveFont(Font.PLAIN,16));
+        } catch (FontFormatException | IOException ex) {
+            Logger.getLogger(PasokTebuController.class.getName()).log(Level.SEVERE, null, ex);
+            //JOptionPane.showMessageDialog(null, ex.toString());
+        }
     }
     
     public void setVersionStatus(){
